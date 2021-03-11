@@ -15,7 +15,13 @@ public class Main {
             Statement statement = conn.createStatement();
             statement.execute("DROP TABLE IF EXISTS "+ TABLE_CONTACTS);
             statement.execute("CREATE TABLE "+TABLE_CONTACTS +"("+COLUMN_NAME+" TEXT,"+COLUMN_PHONE+" INTEGER,"+COLUMN_EMAIL+" TEXT)");
-            statement.execute("INSERT INTO " + TABLE_CONTACTS +" VALUES ('Victor Njunwa',0753932250,'njunwawamavoko@gmail.com'),('Violeth Muganda',0759886643,'violethmukaile@ymail.com'),('Vestina Muganda', 0621876543,'vecyfreddy@gmail.com'),('Valence Kajuna',0765975152,'valencekajuna@yahoo.com')");
+
+            insertContact(statement,"Victor Njunwa","0753932250","njnunwawamavoko@gmail.com");
+            insertContact(statement,"Violeth Muganda","0759886476","violethmukaile@ymail.com");
+            insertContact(statement,"Vestina Muganda","0621889863","vestinamuganda@icloud.com");
+            insertContact(statement,"Valence Kajuna","0765975152","valencekajuna@yahoo.com");
+            insertContact(statement,"Valerian Muganda","0688217637","rutahiwavalerian@yahoo.com");
+
             statement.execute("UPDATE " + TABLE_CONTACTS + " SET "  + COLUMN_PHONE +" = 0688966410 WHERE " + COLUMN_NAME +"='Valence Kajuna'");
             statement.execute("DELETE FROM " + TABLE_CONTACTS + " WHERE " + COLUMN_NAME + " = 'Vestina Muganda'");
 
@@ -31,5 +37,9 @@ public class Main {
             System.out.println("Something went wrong: "+ e.getMessage());
             e.printStackTrace();
         }
+    }
+    private static void insertContact(Statement statement, String name, String phone, String email) throws SQLException{
+        statement.execute("INSERT INTO " + TABLE_CONTACTS +" VALUES ( '"+name+"'," +phone +",'"+ email+"')");
+
     }
 }
